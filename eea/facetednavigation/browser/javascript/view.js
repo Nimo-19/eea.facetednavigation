@@ -309,21 +309,17 @@ Faceted.URLHandler = {
     },
 
     get: function () {
-        const hash = Object.fromEntries(
-            new URLSearchParams(
-                window.location.hash.substring(1) // any_hash_key=any_value
-            )
+        const query = {};
+        const hash = new URLSearchParams(
+            window.location.hash.substring(1) // any_hash_key=any_value
         );
-
-        var query = {};
-        var types = ["number", "boolean", "string"];
-        jQuery.each(hash, function (key, value) {
-            var value_type = typeof value;
-            if (jQuery.inArray(value_type, types) !== -1) {
-                value = [value];
+        for (const [key, param] of hash.entries()) {
+            if (!(key in query)) {
+                query[key] = [];
             }
-            query[key] = value;
-        });
+            query[key].push(param);
+        }
+
         return query;
     },
 
