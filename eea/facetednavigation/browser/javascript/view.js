@@ -311,7 +311,7 @@ Faceted.URLHandler = {
         const hash = new URLSearchParams(
             window.location.hash.substring(1) // any_hash_key=any_value
         );
-        for (const [key, param] in hashParam.entries()) {
+        for (const [key, param] in hash.entries()) {
             if (!(key in hash)) {
                 hash[key] = [param];
             }
