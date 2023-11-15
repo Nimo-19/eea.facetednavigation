@@ -313,7 +313,7 @@ Faceted.URLHandler = {
         );
         for (const [key, param] of hash.entries()) {
             if (!(key in hash)) {
-                query[key] = [param];
+                query[key] = [];
             }
             query[key].push(param);
         }
