@@ -168,7 +168,6 @@ Faceted.Form = {
         var hashquery = Faceted.URLHandler.get();
         var has_hash = !jQuery.isEmptyObject(hashquery);
 
-
         if (has_hash) {
             Faceted.Query = hashquery;
         }
@@ -187,7 +186,6 @@ Faceted.Form = {
         }
 
         jQuery(Faceted.Events).trigger(Faceted.Events.QUERY_INITIALIZED);
-
 
         if (!has_hash) {
             Faceted.URLHandler.set();
@@ -309,21 +307,17 @@ Faceted.URLHandler = {
     },
 
     get: function () {
-        const hash = Object.fromEntries(
-            new URLSearchParams(
-                window.location.hash.substring(1) // any_hash_key=any_value
-            )
+        const query = {};
+        const hash = new URLSearchParams(
+            window.location.hash.substring(1) // any_hash_key=any_value
         );
-
-        var query = {};
-        var types = ["number", "boolean", "string"];
-        jQuery.each(hash, function (key, value) {
-            var value_type = typeof value;
-            if (jQuery.inArray(value_type, types) !== -1) {
-                value = [value];
+        for (const [key, param] in hashParam.entries()) {
+            if (!(key in hash)) {
+                hash[key] = [param];
             }
-            query[key] = value;
-        });
+            hash[key].push(param);
+        }
+
         return query;
     },
 
