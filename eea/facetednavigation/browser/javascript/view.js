@@ -313,9 +313,9 @@ Faceted.URLHandler = {
         );
         for (const [key, param] in hash.entries()) {
             if (!(key in hash)) {
-                hash[key] = [param];
+                query[key] = [param];
             }
-            hash[key].push(param);
+            query[key].push(param);
         }
 
         return query;
