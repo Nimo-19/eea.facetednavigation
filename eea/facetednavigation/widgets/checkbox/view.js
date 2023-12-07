@@ -136,7 +136,7 @@ Faceted.CheckboxesWidget.prototype = {
         // This is done by form.reset, so do nothing
         this.selected = [];
         this.widget.removeClass("faceted-widget-active");
-        jQuery(this.elements).each((_, e) => (e.checked = false));
+        this.elements.each((_, e) => (e.checked = false));
     },
 
     synchronize: function () {
